@@ -1,0 +1,95 @@
+.tabs {
+  display: flex;
+  gap: 14px;
+  padding: 10px;
+  background-color: rgba(white, 0.25);
+  backdrop-filter: blur(3px);
+  border-radius: 12px;
+  margin: 50px 12px 12px 12px;
+}
+
+.tab {
+  position: relative;
+  text-decoration: none;
+  z-index: 1;
+
+  &.selected {
+    outline: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    margin: auto;
+    width: 50%;
+    height: 3px;
+    border-radius: 4px;
+    background-color: rgba(white, 0.8);
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.2s;
+  }
+
+  &.selected::after {
+    opacity: 1;
+    transform: scaleX(1);
+    transition-delay: 0.2s;
+  }
+
+  &.selected .tab-tile {
+    transform: translateY(-40%);
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.2, 0.4, 0.2, 1.8);
+
+    &::before {
+      opacity: 1;
+      box-shadow: 0 8px 18px rgba(black, 0.2);
+      transform: scale(1.1);
+      border-radius: 50%;
+    }
+  }
+
+  &-bookmarks .tab-tile::before {
+    background: linear-gradient(45deg, #f8b5a5, #e2d2fd);
+  }
+
+  &-todos .tab-tile::before {
+    background: linear-gradient(45deg, #a2ffff, #ffbdde);
+  }
+
+  &-notes .tab-tile::before {
+    background: linear-gradient(45deg, #d2cdff, #5fffbc);
+  }
+}
+
+.tab-tile {
+  display: flex;
+  padding: 14px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+
+  &:hover::before {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    opacity: 0.8;
+    transition: all 0.2s;
+    z-index: -1;
+  }
+
+  i {
+    color: #222;
+  }
+}
